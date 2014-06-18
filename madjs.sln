@@ -4,16 +4,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mad", "Mad", "{1DA3AD0E-1CFB-4FBE-8D84-45A872607E0C}"
-	ProjectSection(SolutionItems) = preProject
-		mad.js = mad.js
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{20758391-7D3B-49F6-B3C2-81C466D8BE36}"
 	ProjectSection(SolutionItems) = preProject
 		src\crossroads.js = src\crossroads.js
-		..\..\..\..\Mallcoo\mallcoo\trunk\Mallcoo.Web\Mallcoo.Web.Mobile\Mallcoo.WebApp.MeiShi\WebSource\scripts\libs\ejs.js = ..\..\..\..\Mallcoo\mallcoo\trunk\Mallcoo.Web\Mallcoo.Web.Mobile\Mallcoo.WebApp.MeiShi\WebSource\scripts\libs\ejs.js
+		src\ejs.js = src\ejs.js
 		src\signals.js = src\signals.js
-		..\..\..\..\Mallcoo\mallcoo\trunk\Mallcoo.Web\Mallcoo.Web.Mobile\Mallcoo.WebApp.MeiShi\WebSource\scripts\libs\zepto.js = ..\..\..\..\Mallcoo\mallcoo\trunk\Mallcoo.Web\Mallcoo.Web.Mobile\Mallcoo.WebApp.MeiShi\WebSource\scripts\libs\zepto.js
+		src\touch.js = src\touch.js
+		src\zepto.expand.js = src\zepto.expand.js
+		src\zepto.js = src\zepto.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{7A5C4314-0DE8-4C0F-888D-A9133976A89C}"
+	ProjectSection(SolutionItems) = preProject
+		main.js = main.js
 	EndProjectSection
 EndProject
 Global
@@ -22,5 +26,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{20758391-7D3B-49F6-B3C2-81C466D8BE36} = {1DA3AD0E-1CFB-4FBE-8D84-45A872607E0C}
+		{7A5C4314-0DE8-4C0F-888D-A9133976A89C} = {1DA3AD0E-1CFB-4FBE-8D84-45A872607E0C}
 	EndGlobalSection
 EndGlobal
