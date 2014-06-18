@@ -4,20 +4,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mad", "Mad", "{1DA3AD0E-1CFB-4FBE-8D84-45A872607E0C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{20758391-7D3B-49F6-B3C2-81C466D8BE36}"
 	ProjectSection(SolutionItems) = preProject
-		src\crossroads.js = src\crossroads.js
-		src\ejs.js = src\ejs.js
-		src\signals.js = src\signals.js
-		src\touch.js = src\touch.js
-		src\zepto.expand.js = src\zepto.expand.js
-		src\zepto.js = src\zepto.js
+		_references.js = _references.js
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{7A5C4314-0DE8-4C0F-888D-A9133976A89C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{20758391-7D3B-49F6-B3C2-81C466D8BE36}"
 	ProjectSection(SolutionItems) = preProject
-		main.js = main.js
+		libs\crossroads.js = libs\crossroads.js
+		libs\ejs.js = libs\ejs.js
+		libs\signals.js = libs\signals.js
+		libs\touch.js = libs\touch.js
+		libs\zepto.expand.js = libs\zepto.expand.js
+		libs\zepto.js = libs\zepto.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7A5C4314-0DE8-4C0F-888D-A9133976A89C}"
+	ProjectSection(SolutionItems) = preProject
+		src\mad.core.js = src\mad.core.js
+		src\mad.view.js = src\mad.view.js
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "example", "example", "{F956A02C-55C5-48E5-BE1C-E7BEBE303F89}"
