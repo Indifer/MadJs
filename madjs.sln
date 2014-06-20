@@ -3,39 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mad", "Mad", "{1DA3AD0E-1CFB-4FBE-8D84-45A872607E0C}"
-	ProjectSection(SolutionItems) = preProject
-		_references.js = _references.js
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{20758391-7D3B-49F6-B3C2-81C466D8BE36}"
-	ProjectSection(SolutionItems) = preProject
-		libs\crossroads.js = libs\crossroads.js
-		libs\ejs.js = libs\ejs.js
-		libs\signals.js = libs\signals.js
-		libs\touch.js = libs\touch.js
-		libs\zepto.expand.js = libs\zepto.expand.js
-		libs\zepto.js = libs\zepto.js
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7A5C4314-0DE8-4C0F-888D-A9133976A89C}"
-	ProjectSection(SolutionItems) = preProject
-		src\mad.core.js = src\mad.core.js
-		src\mad.view.js = src\mad.view.js
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "example", "example", "{F956A02C-55C5-48E5-BE1C-E7BEBE303F89}"
-	ProjectSection(SolutionItems) = preProject
-		example\index.html = example\index.html
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Madjs", "http://localhost:64710", "{2F7F2C96-77CA-4AA5-A604-CC43EF877BD2}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_64710"
+		Debug.AspNetCompiler.PhysicalPath = "..\Madjs\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64710\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_64710"
+		Release.AspNetCompiler.PhysicalPath = "..\Madjs\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64710\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\Madjs\"
+		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F7F2C96-77CA-4AA5-A604-CC43EF877BD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F7F2C96-77CA-4AA5-A604-CC43EF877BD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{20758391-7D3B-49F6-B3C2-81C466D8BE36} = {1DA3AD0E-1CFB-4FBE-8D84-45A872607E0C}
-		{7A5C4314-0DE8-4C0F-888D-A9133976A89C} = {1DA3AD0E-1CFB-4FBE-8D84-45A872607E0C}
-		{F956A02C-55C5-48E5-BE1C-E7BEBE303F89} = {1DA3AD0E-1CFB-4FBE-8D84-45A872607E0C}
 	EndGlobalSection
 EndGlobal

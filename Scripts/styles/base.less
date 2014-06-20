@@ -1,0 +1,89 @@
+﻿.text-size-adjust (@adjust: none) {
+    -webkit-text-size-adjust: @adjust;
+    -moz-text-size-adjust: @adjust;
+    -ms-text-size-adjust: @adjust;
+    -o-text-size-adjust: @adjust;
+    text-size-adjust: @adjust;
+}
+.touch-callout(@callout: none){    
+    -webkit-touch-callout: @callout;
+    -moz-touch-callout: @callout;
+    -ms-touch-callout: @callout;
+    -o-touch-callout: @callout;
+    touch-callout: @callout;
+}
+.user-select (@select: none) { 
+    -webkit-user-select: @select;
+    -moz-user-select: @select;
+    -ms-user-select: @select;
+    -o-user-select: @select;
+    user-select: @select;
+}
+.tap-highlight-color (@color: rgba(0,0,0,0)) { 
+    -webkit-tap-highlight-color: @color;
+    -moz-tap-highlight-color: @color;
+    -ms-tap-highlight-color: @color;
+    -o-tap-highlight-color: @color;
+    tap-highlight-color: @color;
+}
+.appearance (@appearance: none) { 
+    -webkit-appearance: @appearance;
+    -moz-appearance: @appearance;
+    -ms-appearance: @appearance;
+    -o-appearance: @appearance;
+    appearance: @appearance;
+}
+.box-orient (@orient: horizontal) { 
+    -webkit-box-orient: @orient;
+    -moz-box-orient: @orient;
+    -ms-box-orient: @orient;
+    -o-box-orient: @orient;
+    box-orient: @orient;
+}
+.box-flex (@flex: 1) { 
+    -webkit-box-flex: @flex;
+    -moz-box-flex: @flex;
+    -ms-box-flex: @flex;
+    -o-box-flex: @flex;
+    box-flex: @flex;
+}
+
+html { }
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, select, p, blockquote, th, td { margin: 0; padding: 0; .tap-highlight-color;}
+html, body, form, fieldset, p, div, h1, h2, h3, h4, h5, h6 { .text-size-adjust;}
+table { border-collapse: collapse; border-spacing: 0; }
+img { border: 0 none; vertical-align: top; }
+li { list-style-type: none; }
+caption, th { text-align: left; }
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+
+body, input, button, textarea, select { font-size: 12px; font-family: Sans-Serif; color: #666; background: #EBEFF1; }
+input { .tap-highlight-color; -webkit-appearance: appearance; background: -webkit-linear-gradient(top,#fff,#fff); outline: none; }
+
+button { cursor: pointer; }
+em, cite { font-style: normal; }
+body { line-height: 1.17; .touch-callout; .user-select; }
+
+a { color: #fff; text-decoration: none; }
+a:link { text-decoration: none; }
+a:visited { }
+a:hover { }
+a:focus { }
+a:active { }
+:focus { outline: none; }
+
+a:focus,input:focus{ 
+    .tap-highlight-color(rgba(0,0,0,0)); 
+    -webkit-user-modify:read-write-plaintext-only; 
+}
+
+
+textarea { resize: none; }
+.clearfixed:after { content: "."; clear: both; display: block; height: 0; overflow: hidden; }
+.clearfixed { zoom: 1; display: block; }
+
+.none { display: none;}
+.block { display: block; }
+.relative { position: relative; } 
+.display-box { display: box; display: -webkit-box; display: -ms-box; display:-moz-box; display:-o-box; .box-orient; }
+.box-flex { display: block; .box-flex; }

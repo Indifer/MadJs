@@ -4,3 +4,8 @@
  * @version 0.0.1(2014/06/18 20:00)
  */
 
+(function (global) {
+    
+    
+
+})(this);

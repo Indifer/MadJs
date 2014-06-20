@@ -110,5 +110,9 @@
         crossroads.resetState();
     };    
     
+    var mad = new Mad();
+    global['mad'] = mad;
+
+    return mad;
 
 })(this);
