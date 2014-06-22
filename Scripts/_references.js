@@ -9,3 +9,4 @@
 /// <reference path="src/mad.view.js" />
 /// <reference path="src/mad.util.js" />
 /// <reference path="src/mad.browserVariables.js" />
+/// <reference path="src/mad.app.js" />
