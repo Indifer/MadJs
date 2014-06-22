@@ -28,17 +28,20 @@
         return this;
     }
 
-    Mad.prototype.addRoute = function (r, options) {
+    /*
+     * add route
+     */
+    Mad.prototype.addRoute = function (rroute, options) {
         
         var _this = this;
         options = options || {};
 
         var action = options.action;
         var beforeAction = options.beforeAction;
-        this.routes[r] = this.crossroads.addRoute(options.route, function () {
+        var _route = this.crossroads.addRoute(options.route, function () {
 
             if (_this.routeType == 0) {
-                var _r = r;
+                var _r = rroute;
                 action.apply(options.action, arguments);
                 _this.currentRouteName = _r;
             }
@@ -48,13 +51,16 @@
             }
 
         });
+
         if (options.rules) {
-            this.routes[r].rules = options.rules;
+            _route.rules = options.rules;
         }
-        this.routes[r].existBeforeAction = typeof (options.beforeAction) == "function";
-        this.routes[r].reset = options.reset;
-        this.routes[r].destroy = options.destroy;
-        this.routes[r].module = options.module;
+        _route.existBeforeAction = typeof (options.beforeAction) == "function";
+        _route.reset = options.reset;
+        _route.destroy = options.destroy;
+        _route.module = options.module;
+
+        this.routes[rroute] = _route;
 
         if (typeof options.initialize == "function") {
             options.initialize();
@@ -110,6 +116,102 @@
         crossroads.resetState();
     };    
     
+    //#region app页面跳转历史
+
+    //app页面历史
+    function AppHistory() {
+
+        this._values = [];
+        return this;
+    }
+
+    //
+    AppHistory.prototype.clear = function () {
+        this._values = [];
+    }
+
+
+    //总数
+    AppHistory.prototype.count = function () {
+        return this._values.length;
+    }
+
+    //
+    AppHistory.prototype.last = function () {
+        if (this._values.length > 0) {
+            return this._values[this._values.length - 1];
+        }
+        return null;
+    }
+
+    AppHistory.prototype.pop = function (count) {
+
+        var result = [];
+        count = count || 1;
+        while (count > 0) {
+
+            if (this._values.length > 0) {
+                result.push(this._values.pop());
+            }
+            count--;
+        }
+        return result;
+    }
+
+    //添加
+    AppHistory.prototype.add = function (val) {
+        if (isNullOrEmpty(val)) return false;
+        val = val.toString().toLowerCase().trim();
+
+        if (this._values.length == 0 || this._values[this._values.length - 1] != val) {
+            this._values.push(val);
+            return true;
+        }
+        return false;
+    }
+
+    //更新
+    AppHistory.prototype.update = function (val, index) {
+        if (isNullOrEmpty(val) || index < 0) return false;
+        val = val.toString().toLowerCase().trim();
+
+        if (this._values.length > index) {
+            this._values[index] = val;
+            return true;
+        }
+        return false;
+    }
+
+    //
+    AppHistory.prototype.item = function (index) {
+
+        if (index < 0 || index > this._values.length - 1) return null;
+        return this._values[index];
+    }
+
+    AppHistory.prototype.backTo = function (name) {
+
+        if (isNullOrEmpty(name)) return;
+
+        var count = this.count();
+        if (count > 1) {
+
+            for (var i = count - 1; i >= 0; i--) {
+
+                if (this.item(i).indexOf(name.toLowerCase()) > -1) {
+                    this.pop(count - i);
+                    return true;
+                }
+            }
+        }
+
+        return false
+    }
+
+    Mad.prototype.appHistory = new AppHistory();
+
+    //#endregion
+
     var mad = new Mad();
     global['mad'] = mad;
 

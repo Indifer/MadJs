@@ -5,7 +5,10 @@
  */
 
 (function (global) {
-    
-    
+
+
+    mad.constructor.prototype.hello = function () {
+        alert(1);
+    };
 
 })(this);

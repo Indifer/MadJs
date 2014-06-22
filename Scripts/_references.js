@@ -7,3 +7,5 @@
 /// <reference path="libs/zepto.js" />
 /// <reference path="src/mad.core.js" />
 /// <reference path="src/mad.view.js" />
+/// <reference path="src/mad.util.js" />
+/// <reference path="src/mad.browserVariables.js" />
