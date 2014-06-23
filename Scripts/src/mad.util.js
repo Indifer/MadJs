@@ -13,7 +13,7 @@
 		//判断是否为空字符或null
 		isNullOrEmpty: function (value) {
 
-			if (value == null || String.prototype.trim.call(str) === "") {
+		    if (value == null || String.prototype.trim.call(value) === "") {
 				return true;
 			}
 			else {

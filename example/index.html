@@ -10,7 +10,23 @@
     <title>demo</title>
 </head>
 <body>
-    <div>aaa</div>
+    <div id="outer">
+        <div class="container clearfixed">
+
+            <div id="page_one" class="none" data-role="page">
+                <header>aaa</header>
+                <section>one</section>
+            </div>
+
+            <div id="page_two" class="none" data-role="page">
+                <header>two</header>
+                <section>two</section>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript" src="../Scripts/libs/zepto.js"></script>
+    <script type="text/javascript" src="../Scripts/libs/zepto.expand.js"></script>
     <script type="text/javascript" src="../Scripts/libs/signals.js"></script>
     <script type="text/javascript" src="../Scripts/libs/crossroads.js"></script>
     <script type="text/javascript" src="../Scripts/libs/ejs.js"></script>
@@ -18,8 +34,34 @@
     <script type="text/javascript" src="../Scripts/src/mad.view.js"></script>
     <script type="text/javascript" src="../Scripts/src/mad.browserVariables.js"></script>
     <script type="text/javascript" src="../Scripts/src/mad.util.js"></script>
+    <script type="text/javascript" src="../Scripts/src/mad.app.js"></script>
     <script type="text/javascript">
-        
+        mad.addRoute("page_one", {
+            route: "page_one",
+            rules: {
+
+            },
+            action: function () {
+
+            },
+            init: function () {
+            }
+        });
+
+        mad.addRoute("page_two", {
+            route: "page_two",
+            rules: {
+
+            },
+            action: function () {
+
+            },
+            init: function () {
+            }
+        });
+
+        mad.app.ready();
+        mad.app.toPage("#page_one");
     </script>
 </body>
 </html>

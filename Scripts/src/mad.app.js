@@ -51,7 +51,7 @@
 
 	//添加
 	AppHistory.prototype.add = function (val) {
-		if (isNullOrEmpty(val)) return false;
+		if (mad.util.isNullOrEmpty(val)) return false;
 		val = val.toString().toLowerCase().trim();
 
 		if (this._values.length == 0 || this._values[this._values.length - 1] != val) {
@@ -63,7 +63,7 @@
 
 	//更新
 	AppHistory.prototype.update = function (val, index) {
-		if (isNullOrEmpty(val) || index < 0) return false;
+	    if (mad.util.isNullOrEmpty(val) || index < 0) return false;
 		val = val.toString().toLowerCase().trim();
 
 		if (this._values.length > index) {
@@ -82,7 +82,7 @@
 
 	AppHistory.prototype.backTo = function (name) {
 
-		if (isNullOrEmpty(name)) return;
+	    if (mad.util.isNullOrEmpty(name)) return;
 
 		var count = this.count();
 		if (count > 1) {
@@ -119,14 +119,7 @@
 			s = speed / 1000.0 + "s";
 			var translate3d;
 			var easing = "ease-out";
-			//debug
-			//transition = _isAndroid && "slideLeft|slideRight".indexOf(transition) > -1 ? "fade" : transition;
-			if (_type != 3) {
-				//transition = _isAndroid && (app.device.phoneVersion < "3.0.0") ? "fade" : transition;
-				transition = "fade";
-			}
 
-			//enddebug
 			switch (transition) {
 				case "slideLeft":
 				case "slideRight":
@@ -159,7 +152,7 @@
 						"opacity": 1
 					});
 
-					windowResize();
+					this.windowResize();
 
 					if (transition == "slideLeft") {
 						translate3d = "translate3d" + "(" + "-" + w + "px" + "," + "0px" + "," + "0px" + ")";
@@ -308,23 +301,25 @@
 		},
 
 		toPage: function (toRoute, transition, reset, transitionsCallback, back) {
-			if (mad.util.isNullOrEmpty(toRoute) || this.transitionsFlag != 0) {
+		    var _this = this;
+
+		    if (mad.util.isNullOrEmpty(toRoute) || _this.transitionsFlag != 0) {
 				return;
 			}
-			this.transitionsFlag = 2;
+		    _this.transitionsFlag = 2;
 			//var fromRoute = this.controller.getRouteNameByRoute(fromRoute); 
 			var fromRouteName = mad.currentRouteName;
 			var toRoute = toRoute;
 			var toRouteName = mad.getRouteNameByRoute(toRoute);
 			if (toRouteName == "" || $("#" + toRouteName).css("display") == "block" && readyed) {
-				this.transitionsFlag = 0;
+			    _this.transitionsFlag = 0;
 				return;
 			}
 
 			reset = reset != null && reset.toString() == "true" ? true : false;
 			back = back != null && back.toString() == "true" ? true : false;
 			//history
-			if (!back) {			
+			if (!back && mad.currentRoute) {
 				mad.history.add(mad.currentRoute);
 			}
 
@@ -342,7 +337,7 @@
 
 				mad.gotoRoute(toRoute.trim());
 
-				this.transitionsFlag = 0;
+				_this.transitionsFlag = 0;
 
 				if (typeof transitionsCallback == "function") {
 					transitionsCallback();
@@ -357,6 +352,8 @@
 		windowResize: function () { },
 		ready: function () {
 
+		    var _this = this;
+
 			document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
 			this.width = $(window).width();
@@ -368,15 +365,15 @@
 			$("[data-role]").each(function () {
 
 				var role = $(this).attr("data-role");
-				if (!isNullOrEmpty(role) && /(page)|(modal)/.test(role)) {
+				if (!mad.util.isNullOrEmpty(role) && /(page)|(modal)/.test(role)) {
 
-					$(this).css({ "width": this.width + "px", "height": this.height + "px", "display": "none" });
+				    $(this).css({ "width": _this.width + "px", "height": _this.height + "px", "display": "none" });
 					$(this).addClass(role);
-					this.views[$(this).attr("id")] = { role: role };
+					_this.views[$(this).attr("id")] = { role: role };
 
 					$(this).find("[data-role='scrollerSection']").addClass("scrollerSection");
 
-					if (this.statusbar) {
+					if (_this.statusbar) {
 						$(this).prepend('<div class="statusbar"></div>');
 					}
 				}
@@ -390,10 +387,10 @@
 				var reset = $(this).attr("data-reset");
 				var back = $(this).attr("data-back");
 				if (back == "true") {
-					this.back(transition, reset, null);
+				    _this.back(transition, reset, null);
 				}
 				else {
-					this.toPage(forhash, transition, reset, null);
+				    _this.toPage(forhash, transition, reset, null);
 				}
 
 				return false;

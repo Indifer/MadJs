@@ -176,4 +176,32 @@ textarea {
   -o-box-flex: 1;
   box-flex: 1;
 }
-/*# sourceMappingURL=base.css.map */
+#outer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300%;
+}
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.page header {
+  width: 100%;
+  position: relative;
+}
+.page section {
+  overflow: hidden;
+  position: relative;
+}
+.page footer {
+  width: 100%;
+}
+/*# sourceMappingURL=mad.css.map */

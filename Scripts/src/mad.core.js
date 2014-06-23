@@ -62,8 +62,8 @@
 
         this.routes[rroute] = _route;
 
-        if (typeof options.initialize == "function") {
-            options.initialize();
+        if (typeof options.init == "function") {
+            options.init();
         }
 
     };
