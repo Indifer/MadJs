@@ -7,6 +7,7 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="../styles/mad.css" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
     <title>demo</title>
 </head>
 <body>
@@ -14,54 +15,78 @@
         <div class="container clearfixed">
 
             <div id="page_one" class="none" data-role="page">
-                <header>aaa</header>
-                <section>one</section>
+                <header>
+                    <div class="header-con">
+                        <div class="title"><span>Page One</span></div>
+                        <div class="right" data-forhash="#page_two" data-transition="slideLeft">
+                            <div class="btn-back"><span>></span></div>
+                        </div>
+                    </div>
+                </header>
+                <section><div style="font-size:50px;text-align:center;">one</div></section>
             </div>
 
             <div id="page_two" class="none" data-role="page">
-                <header>two</header>
-                <section>two</section>
+                <header>
+                    <div class="header-con">
+                        <div class="title"><span>Page One</span></div>
+                        <div class="left" data-forhash="#page_one" data-transition="slideRight" data-back="true">
+                            <div class="btn-back"><span><</span></div>
+                        </div>
+                    </div>
+                </header>
+                <section><div style="font-size:50px;text-align:center;">two</div></section>
             </div>
 
         </div>
     </div>
-    <script type="text/javascript" src="../Scripts/libs/zepto.js"></script>
-    <script type="text/javascript" src="../Scripts/libs/zepto.expand.js"></script>
-    <script type="text/javascript" src="../Scripts/libs/signals.js"></script>
-    <script type="text/javascript" src="../Scripts/libs/crossroads.js"></script>
-    <script type="text/javascript" src="../Scripts/libs/ejs.js"></script>
-    <script type="text/javascript" src="../Scripts/src/mad.core.js"></script>
-    <script type="text/javascript" src="../Scripts/src/mad.view.js"></script>
-    <script type="text/javascript" src="../Scripts/src/mad.browserVariables.js"></script>
-    <script type="text/javascript" src="../Scripts/src/mad.util.js"></script>
-    <script type="text/javascript" src="../Scripts/src/mad.app.js"></script>
+    <script type="text/javascript" src="../scripts/libs/zepto.js"></script>
+    <script type="text/javascript" src="../scripts/libs/zepto.expand.js"></script>
+    <script type="text/javascript" src="../scripts/libs/zepto.touch.js"></script>
+    <script type="text/javascript" src="../scripts/libs/signals.js"></script>
+    <script type="text/javascript" src="../scripts/libs/crossroads.js"></script>
+    <script type="text/javascript" src="../scripts/libs/ejs.js"></script>
+    <script type="text/javascript" src="../scripts/src/mad.core.js"></script>
+    <script type="text/javascript" src="../scripts/src/mad.view.js"></script>
+    <script type="text/javascript" src="../scripts/src/mad.browserVariables.js"></script>
+    <script type="text/javascript" src="../scripts/src/mad.util.js"></script>
+    <script type="text/javascript" src="../scripts/src/mad.app.js"></script>
     <script type="text/javascript">
-        mad.addRoute("page_one", {
-            route: "page_one",
-            rules: {
+        $(document).ready(function () {
+            //page one route
+            mad.addController("page_one", {
+                route: "page_one",
+                rules: {
 
-            },
-            action: function () {
+                },
+                action: function () {
 
-            },
-            init: function () {
-            }
+                },
+                init: function () {
+                },
+                module: {
+                    hellow: function () {
+                        alert("hellow")
+                    }
+                }
+            });
+
+            //page two route
+            mad.addController("page_two", {
+                route: "page_two",
+                rules: {
+
+                },
+                action: function () {
+
+                },
+                init: function () {
+                }
+            });
+
+            mad.app.ready();
+            mad.app.toPage("#page_one");
         });
-
-        mad.addRoute("page_two", {
-            route: "page_two",
-            rules: {
-
-            },
-            action: function () {
-
-            },
-            init: function () {
-            }
-        });
-
-        mad.app.ready();
-        mad.app.toPage("#page_one");
     </script>
 </body>
 </html>

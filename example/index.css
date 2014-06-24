@@ -1,0 +1,68 @@
+﻿header {
+    background: #ff6a00;
+}
+
+    header .header-con {
+        width: 100%;
+        position: relative;
+        margin: 0 auto;
+        height: 44px;
+    }
+
+    header .title span {
+        margin-top: 12px;
+        display: inline-block;
+    }
+
+    header .left {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 66px;
+        text-align: left;
+        float: left;
+        color: #FFFFFF;
+        font-size: 18px;
+        text-align: center;
+    }
+    
+        header .left:active {
+            color: #808080;
+        }
+
+        header .left span {
+            margin-top: 12px;
+            display: inline-block;
+        }
+
+    header .right {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        float: right;
+        width: 66px;
+        color: #FFFFFF;
+        font-size: 18px;
+        text-align: center;
+    }
+
+        header .right:active {
+            color: #808080;
+        }
+
+        header .right span {
+            margin-top: 12px;
+            display: inline-block;
+        }
+
+    header .title {
+        text-align: center;
+        font-size: 18px;
+        color: #FFFFFF;
+    }
+
+.none {
+    display: none;
+}

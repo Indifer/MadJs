@@ -19,7 +19,7 @@
 
         //0:Õý³££»1£ºbeforeAction
         this.routeType = 0;
-        this.routes = {};
+        this.controllers = {};
 
         this.crossroads.bypassed.add(function (request) {
             console.log(request);
@@ -29,9 +29,9 @@
     }
 
     /*
-     * add route
+     * add controller
      */
-    Mad.prototype.addRoute = function (rroute, options) {
+    Mad.prototype.addController = function (route, options) {
         
         var _this = this;
         options = options || {};
@@ -41,7 +41,7 @@
         var _route = this.crossroads.addRoute(options.route, function () {
 
             if (_this.routeType == 0) {
-                var _r = rroute;
+                var _r = route;
                 action.apply(options.action, arguments);
                 _this.currentRouteName = _r;
             }
@@ -60,7 +60,7 @@
         _route.destroy = options.destroy;
         _route.module = options.module;
 
-        this.routes[rroute] = _route;
+        this.controllers[route] = _route;
 
         if (typeof options.init == "function") {
             options.init();
@@ -71,16 +71,16 @@
     Mad.prototype.getRouteNameByRoute = function (route) {
         route = route.indexOf("#") > -1 ? route.substr(1) : route;
 
-        for (var n in this.routes) {
+        for (var n in this.controllers) {
 
-            if (this.routes[n].match(route)) { return n; }
+            if (this.controllers[n].match(route)) { return n; }
         }
         return "";
     };
 
     Mad.prototype.getRouteByParameter = function (routeName, parameter) {
         
-        var route = this.routes[routeName];
+        var route = this.controllers[routeName];
         if (!route) return "";
 
         return route.interpolate(parameter);
