@@ -51,7 +51,7 @@
 
     //添加
     AppHistory.prototype.add = function (val) {
-        if (mad.util.isNullOrEmpty(val)) return false;
+        if (util.isNullOrEmpty(val)) return false;
         val = val.toString().toLowerCase().trim();
 
         if (this._values.length == 0 || this._values[this._values.length - 1] != val) {
@@ -63,7 +63,7 @@
 
     //更新
     AppHistory.prototype.update = function (val, index) {
-        if (mad.util.isNullOrEmpty(val) || index < 0) return false;
+        if (util.isNullOrEmpty(val) || index < 0) return false;
         val = val.toString().toLowerCase().trim();
 
         if (this._values.length > index) {
@@ -82,7 +82,7 @@
 
     AppHistory.prototype.backTo = function (name) {
 
-        if (mad.util.isNullOrEmpty(name)) return;
+        if (util.isNullOrEmpty(name)) return;
 
         var count = this.count();
         if (count > 1) {
@@ -303,13 +303,13 @@
             var _this = this;
             var toRoute = mad.history.last();
             mad.history.pop();
-            _this.toPage(toRoute, transition, reset, transitionsCallback, true);
+            _this.gotoPage(toRoute, transition, reset, transitionsCallback, true);
 
         },
-        toPage: function (toRoute, transition, reset, transitionsCallback, back) {
+        gotoPage: function (toRoute, transition, reset, transitionsCallback, back) {
             var _this = this;
 
-            if (mad.util.isNullOrEmpty(toRoute) || _this.transitionsFlag != 0) {
+            if (util.isNullOrEmpty(toRoute) || _this.transitionsFlag != 0) {
                 return;
             }
             _this.transitionsFlag = 2;
@@ -408,7 +408,7 @@
             $("[data-role]").each(function () {
 
                 var role = $(this).attr("data-role");
-                if (!mad.util.isNullOrEmpty(role) && /(page)|(modal)/.test(role)) {
+                if (!util.isNullOrEmpty(role) && /(page)|(modal)/.test(role)) {
 
                     $(this).css({ "width": _this.width + "px", "height": _this.height + "px", "display": "none" });
                     $(this).addClass(role);
@@ -433,7 +433,7 @@
                     _this.back(transition, reset, null);
                 }
                 else {
-                    _this.toPage(forhash, transition, reset, null);
+                    _this.gotoPage(forhash, transition, reset, null);
                 }
 
                 return false;

@@ -5,10 +5,8 @@
  */
 
 (function (global) {
-
-	mad.constructor.prototype.util = {};
-
-	mad.util = {
+    	
+	global.util = {
 
 		//判断是否为空字符或null
 		isNullOrEmpty: function (value) {

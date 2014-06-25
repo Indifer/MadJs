@@ -1,0 +1,10 @@
+{
+  "name": "build",
+  "version": "0.0.0",
+  "description": "build",
+  "main": "app.js",
+  "author": {
+    "name": "yi",
+    "email": ""
+  }
+}
