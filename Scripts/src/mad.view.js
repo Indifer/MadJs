@@ -9,7 +9,23 @@
     mad.constructor.prototype.view = {
         tempCached: true,
         templates: {},
-
+        pages: {},
+        //ÃÌº”page
+        addPage: function (id, url, data) {
+            this.pages[id] = {
+                url: url,
+                data: data
+            };
+        },
+        getPage: function (id) {
+            if (pages[id]) {
+                return render({
+                    cache: false,
+                    url: pages[id].url
+                }, pages[id].data);
+            }
+            return null;
+        },
         //ÃÌº” ”Õº
         addTemp: function (name, text) {
             this.templates[name] = text;
