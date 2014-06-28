@@ -182,7 +182,7 @@ textarea {
   width: 100%;
   overflow: hidden;
 }
-.container {
+#container {
   position: absolute;
   top: 0;
   left: 0;

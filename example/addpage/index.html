@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -19,7 +19,7 @@
                     <div class="header-con">
                         <div class="title"><span>Page One</span></div>
                         <div class="right" data-forhash="#page_two" data-transition="slideLeft">
-                            <div class="btn-back"><span>></span></div>
+                            <div><span>&gt;</span></div>
                         </div>
                     </div>
                 </header>
@@ -31,7 +31,10 @@
                     <div class="header-con">
                         <div class="title"><span>Page One</span></div>
                         <div class="left" data-forhash="#page_one" data-transition="slideRight" data-back="true">
-                            <div class="btn-back"><span><</span></div>
+                            <div><span>&lt;</span></div>
+                        </div>
+                        <div class="right" data-forhash="#page_three" data-transition="slideLeft">
+                            <div><span>&gt;</span></div>
                         </div>
                     </div>
                 </header>
@@ -83,6 +86,21 @@
                 init: function () {
                 }
             });
+
+            //page three route
+            mad.addController("page_three", {
+                route: "page_three",
+                rules: {
+
+                },
+                action: function () {
+
+                },
+                init: function () {
+                }
+            });
+
+            mad.view.addPage("page_three", "page-three.ejs");
 
             mad.app.ready();
             mad.app.gotoPage("#page_one");

@@ -312,14 +312,37 @@
             if (util.isNullOrEmpty(toRoute) || _this.transitionsFlag != 0) {
                 return;
             }
+
             _this.transitionsFlag = 2;
             //var fromRoute = this.controller.getRouteNameByRoute(fromRoute); 
             var fromRouteName = mad.currentRouteName;
             var toRoute = toRoute;
             var toRouteName = mad.getRouteNameByRoute(toRoute);
-            if (toRouteName == "" || $("#" + toRouteName).css("display") == "block" && readyed) {
+            if (toRouteName == "" || $("#" + toRouteName).css("display") == "block") {
                 _this.transitionsFlag = 0;
                 return;
+            }
+
+            var page = $("#" + toRouteName);
+            if (page.length == 0 && mad.view && mad.view.getPage) {
+
+                if (_this.showLoading) {
+                    _this.showLoading();
+                }
+
+                page = mad.view.getPage(toRouteName);
+                page = $(page);
+                page.attr("id", toRouteName);
+                page.attr("data-role", "page");
+                page.addClass("page");
+                page.addClass("none")
+
+                var container = $("#container");
+                container.append(page);
+
+                if (_this.hideLoading) {
+                    _this.hideLoading();
+                }
             }
 
             reset = reset != null && reset.toString() == "true" ? true : false;
@@ -398,10 +421,10 @@
             var $div = $("div");
             $div.attr("id", "mad-outer");
             $container = $("div");
-            $container.addClass("container");
+            $container.attr("id", "container");
             $container.addClass("clearfixed");
             $div.append($container);
-            
+
             $("body").children().remove();
             $("body").append($div);
         },
@@ -441,7 +464,7 @@
 
             //route btn
             $("[data-forhash]").globalTapLive(function () {
-                
+
                 var forhash = $(this).attr("data-forhash");
                 var transition = $(this).attr("data-transition");
                 var reset = $(this).attr("data-reset");

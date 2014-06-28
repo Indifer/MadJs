@@ -39,7 +39,7 @@
         var action = options.action;
         var beforeAction = options.beforeAction;
         var _route = this.crossroads.addRoute(options.route, function () {
-
+            
             if (_this.routeType == 0) {
                 var _r = route;
                 action.apply(options.action, arguments);

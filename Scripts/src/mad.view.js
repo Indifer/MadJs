@@ -18,11 +18,14 @@
             };
         },
         getPage: function (id) {
-            if (pages[id]) {
-                return render({
+
+            var page = this.pages[id];
+
+            if (page) {
+                return this.render({
                     cache: false,
-                    url: pages[id].url
-                }, pages[id].data);
+                    url: page.url
+                }, page.data);
             }
             return null;
         },
