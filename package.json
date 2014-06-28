@@ -2,9 +2,9 @@
   "name": "build",
   "version": "0.0.0",
   "description": "build",
-  "main": "app.js",
+  "main": "mad.js",
   "author": {
-    "name": "yi",
-    "email": ""
+    "name": "indifer",
+    "email": "indifer@126.com"
   }
 }

@@ -363,7 +363,7 @@
 
             document.documentElement.style.height = _this.height + "px";
 
-            $("#outer").css({
+            $("#mad-outer").css({
                 "height": _this.height
             });
 
@@ -393,6 +393,18 @@
             });
 
         },
+        initPage: function () {
+
+            var $div = $("div");
+            $div.attr("id", "mad-outer");
+            $container = $("div");
+            $container.addClass("container");
+            $container.addClass("clearfixed");
+            $div.append($container);
+            
+            $("body").children().remove();
+            $("body").append($div);
+        },
         ready: function () {
 
             var _this = this;
@@ -402,7 +414,12 @@
             _this.width = $(window).width();
             _this.height = $(window).height();
 
-            $("#outer").css("height", this.height);
+            var outer = $("#mad-outer");
+            if (outer.length == 0) {
+                _this.initPage();
+            }
+
+            $("#mad-outer").css("height", this.height);
 
             //page
             $("[data-role]").each(function () {
