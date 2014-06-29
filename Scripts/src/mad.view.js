@@ -13,7 +13,7 @@
     mad.view.templates = {};
     mad.view.pages = {};
     
-    mad.extend(mad.fn.view, { //Ìí¼Ópage
+    mad.extend(mad.fn.view, { //æ·»åŠ page
         addPage: function (id, url, data) {
             this.pages[id] = {
                 url: url,
@@ -32,12 +32,12 @@
             }
             return null;
         },
-        //Ìí¼ÓÊÓÍ¼
+        //æ·»åŠ è§†å›¾
         addTemp: function (name, text) {
             this.templates[name] = text;
         },
 
-        //äÖÈ¾
+        //æ¸²æŸ“
         render: function (options, data) {
 
             var isTempCached = this.tempCached;

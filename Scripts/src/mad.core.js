@@ -17,7 +17,7 @@
         this.lastRoute = "";
         this.lastRouteName = "";
 
-        //0:Õý³££»1£ºbeforeAction
+        //0:æ­£å¸¸ï¼›1ï¼šbeforeAction
         this.routeType = 0;
         this.controllers = {};
 

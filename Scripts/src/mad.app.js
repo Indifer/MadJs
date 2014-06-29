@@ -1,4 +1,4 @@
-﻿/*
+/*
  * @author:indifer
  * @email:indifer@126.com
  * @version 0.0.1(2014/06/23 00:56)

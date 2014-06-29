@@ -2,7 +2,7 @@
  * build <>
  * Author: indifer | MIT License
  * Email: indifer@126.com
- * v0.9.0 (2014/06/29 12:58)
+ * v0.9.0 (2014/06/29 13:29)
  */
 
 
@@ -1193,7 +1193,7 @@ if (typeof define === 'function' && define.amd) {
         this.lastRoute = "";
         this.lastRouteName = "";
 
-        //0:������1��beforeAction
+        //0:正常；1：beforeAction
         this.routeType = 0;
         this.controllers = {};
 
@@ -1583,7 +1583,7 @@ if (typeof define === 'function' && define.amd) {
     mad.view.templates = {};
     mad.view.pages = {};
     
-    mad.extend(mad.fn.view, { //����page
+    mad.extend(mad.fn.view, { //添加page
         addPage: function (id, url, data) {
             this.pages[id] = {
                 url: url,
@@ -1602,12 +1602,12 @@ if (typeof define === 'function' && define.amd) {
             }
             return null;
         },
-        //������ͼ
+        //添加视图
         addTemp: function (name, text) {
             this.templates[name] = text;
         },
 
-        //��Ⱦ
+        //渲染
         render: function (options, data) {
 
             var isTempCached = this.tempCached;
@@ -1636,7 +1636,7 @@ if (typeof define === 'function' && define.amd) {
     });
 
 })(this);
-﻿/*
+/*
  * @author:indifer
  * @email:indifer@126.com
  * @version 0.0.1(2014/06/23 00:56)
