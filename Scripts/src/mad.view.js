@@ -6,11 +6,14 @@
 
 (function (global) {
 
-    mad.constructor.prototype.view = {
-        tempCached: true,
-        templates: {},
-        pages: {},
-        //Ìí¼Ópage
+    mad.fn.view = {
+    };
+
+    mad.view.tempCached = true;
+    mad.view.templates = {};
+    mad.view.pages = {};
+    
+    mad.extend(mad.fn.view, { //Ìí¼Ópage
         addPage: function (id, url, data) {
             this.pages[id] = {
                 url: url,
@@ -60,7 +63,6 @@
 
             return new EJS(options);
         }
-    };
-
+    });
 
 })(this);

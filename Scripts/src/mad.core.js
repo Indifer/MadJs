@@ -116,9 +116,18 @@
         crossroads.resetState();
     };    
 
-    var mad = new Mad();
-    global['mad'] = mad;
+    Mad.prototype.extend = function (target, src) {
+        for (var key in src) {
+            if (src.hasOwnProperty(key)) {
+                target[key] = src[key];
+            }
+        }
+    };
 
+    var mad = new Mad();
+    mad.fn = Mad.prototype;
+    global['mad'] = mad;
+        
     return mad;
 
 })(this);

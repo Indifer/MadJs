@@ -35,4 +35,4 @@
             this.one("click", f);
         }
     };
-})(Zepto);
+})(Zepto || jQuery);

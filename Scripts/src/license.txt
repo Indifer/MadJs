@@ -1,0 +1,6 @@
+/** @license
+ * ::NAME:: <::HOMEPAGE::>
+ * Author: ::AUTHOR:: | ::LICENSE:: License
+ * Email: ::EMAIL::
+ * v::VERSION_NUMBER:: (::BUILD_DATE::)
+ */

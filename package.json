@@ -1,10 +1,29 @@
 {
-  "name": "build",
-  "version": "0.0.0",
-  "description": "build",
-  "main": "mad.js",
-  "author": {
-    "name": "indifer",
-    "email": "indifer@126.com"
-  }
+    "name": "build",
+    "description": "Help develop one page app for the mobile web",
+    "version": "0.9.0",
+    "description": "build",
+    "homepage": "",
+    "main": "mad.js",
+    "licenses" : [
+        {
+            "type" : "MIT",
+            "url" : "http://www.opensource.org/licenses/mit-license.php"
+        }
+    ],
+    "author": {
+        "name": "indifer",
+        "email": "indifer@126.com"
+    },
+    "keywords": [
+        "mobile",
+        "mvc",
+        "webapp",
+        "opa"
+    ],
+    "dependencies": {
+        "ejs": "1.0.0",
+        "zepto": ">=1.1.0",
+        "zepto.touch.js": ">=1.1.0"
+    }
 }

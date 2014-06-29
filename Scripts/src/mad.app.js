@@ -99,14 +99,16 @@
         return false
     }
 
-    mad.constructor.prototype.history = new AppHistory();
-
+    mad.history = new AppHistory();
     //#endregion
 
-    mad.constructor.prototype.app = {
-        views: {},
-        transitionsFlag: 0,
+    mad.fn.app = {
+    };
 
+    mad.app.views = {};
+    mad.app.transitionsFlag = 0;
+
+    mad.extend(mad.fn.app, {
         transitions: function (transition, show, hide, speed, transitionsCallback) {
 
             var browserVariables = mad.browserVariables;
@@ -323,27 +325,7 @@
                 return;
             }
 
-            var page = $("#" + toRouteName);
-            if (page.length == 0 && mad.view && mad.view.getPage) {
-
-                if (_this.showLoading) {
-                    _this.showLoading();
-                }
-
-                page = mad.view.getPage(toRouteName);
-                page = $(page);
-                page.attr("id", toRouteName);
-                page.attr("data-role", "page");
-                page.addClass("page");
-                page.addClass("none")
-
-                var container = $("#container");
-                container.append(page);
-
-                if (_this.hideLoading) {
-                    _this.hideLoading();
-                }
-            }
+            _this.initPage(toRouteName);
 
             reset = reset != null && reset.toString() == "true" ? true : false;
             back = back != null && back.toString() == "true" ? true : false;
@@ -377,6 +359,32 @@
                 mad.gotoRouteBefore(toRoute.trim());
             }
             _this.transitions(transition, toRouteName, fromRouteName, null, callbackFunc);
+        },
+        //初始化page
+        initPage: function (id) {
+            var _this = this;
+
+            var page = $("#" + id);
+            if (page.length == 0 && mad.view && mad.view.getPage) {
+
+                if (_this.showLoading) {
+                    _this.showLoading();
+                }
+
+                page = mad.view.getPage(id);
+                page = $(page);
+                page.attr("id", id);
+                page.attr("data-role", "page");
+                page.addClass("page");
+                page.addClass("none")
+
+                var container = $("#container");
+                container.append(page);
+
+                if (_this.hideLoading) {
+                    _this.hideLoading();
+                }
+            }
         },
         windowResize: function () {
 
@@ -416,17 +424,21 @@
             });
 
         },
-        initPage: function () {
+        initApp: function () {
 
-            var $div = $("div");
-            $div.attr("id", "mad-outer");
-            $container = $("div");
-            $container.attr("id", "container");
-            $container.addClass("clearfixed");
-            $div.append($container);
+            var outer = $("#mad-outer");
+            if (outer.length == 0) {
 
-            $("body").children().remove();
-            $("body").append($div);
+                var $div = $("div");
+                $div.attr("id", "mad-outer");
+                $container = $("div");
+                $container.attr("id", "container");
+                $container.addClass("clearfixed");
+                $div.append($container);
+
+                $("body").children().remove();
+                $("body").append($div);
+            }
         },
         ready: function () {
 
@@ -437,10 +449,7 @@
             _this.width = $(window).width();
             _this.height = $(window).height();
 
-            var outer = $("#mad-outer");
-            if (outer.length == 0) {
-                _this.initPage();
-            }
+            _this.initApp();
 
             $("#mad-outer").css("height", this.height);
 
@@ -479,6 +488,8 @@
                 return false;
             });
         }
-    };
+    });
+
+
 
 })(this);
