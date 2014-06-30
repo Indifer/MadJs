@@ -1,8 +1,7 @@
 {
-    "name": "build",
+    "name": "Madjs",
     "description": "Help develop one page app for the mobile web",
     "version": "0.9.0",
-    "description": "build",
     "homepage": "",
     "main": "mad.js",
     "licenses" : [
