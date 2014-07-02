@@ -1,8 +1,8 @@
 ﻿/** @license
- * build <>
+ * Madjs <>
  * Author: indifer | MIT License
  * Email: indifer@126.com
- * v0.9.0 (2014/06/29 13:29)
+ * v0.9.0 (2014/07/02 16:24)
  */
 
 
