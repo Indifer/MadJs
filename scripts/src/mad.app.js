@@ -104,9 +104,92 @@
 
     mad.fn.app = {
     };
-
+    
     mad.app.views = {};
     mad.app.transitionsFlag = 0;
+    mad.app.isIos = null;
+    mad.app.isAndroid = null;
+    mad.app.isHideBrowserTop = true;
+
+    var events = {};
+
+    function hideBrowserTop() {
+        window.scrollTo(0, 1);
+    }
+
+    //屏幕大小改变
+    function windowResizeFunc() {
+
+        if (mad.app.isHideBrowserTop) {
+            document.documentElement.style.height = "2000px";
+            hideBrowserTop();
+        }
+
+        windowResize();
+
+        //setTimeout(function () { document.documentElement.style.height = app.height + "px"; }, 50)
+    }
+
+    //屏幕方向改变
+    function orientationChange() {
+        switch (window.orientation) {
+            case 0: // Portrait
+            case 180: // Upside-down Portrait
+            case -90: // Landscape: turned 90 degrees counter-clockwise
+            case 90: // Landscape: turned 90 degrees clockwise
+                // Javascript to steup Landscape view
+                windowResizeFunc();
+                break;
+        }
+    }
+    
+    //屏幕大小改变
+    function windowResize() {
+
+        var _this = this;
+        _this.width = $(window).width();
+        _this.height = $(window).height();
+
+        document.documentElement.style.height = _this.height + "px";
+
+        $("#mad-outer").css({
+            "height": _this.height
+        });
+
+        $(".page").css({
+            "width": _this.width,
+            "height": _this.height
+        });
+
+        $(".page").each(function () {
+
+            var scrollerSectionHeight = _this.height - $(this).find("header").height()
+                                                    - $(this).find("footer").height()
+            - $(this).find(".statusbar").height();
+            $(this).find("section").height(scrollerSectionHeight);
+        });
+
+
+        $(".modal").css({
+            "width": _this.width,
+            "height": _this.height
+        });
+
+        $(".modal").each(function () {
+
+            var scrollerSectionHeight = _this.height - $(this).find("header").height() - $(this).find("footer").height() - $(this).find(".statusbar").height();
+            $(this).find("section").height(scrollerSectionHeight);
+        });
+
+
+        if (mad.controllers[mad.currentRouteName]) {
+            var contr = mad.controllers[mad.currentRouteName];
+
+            contr && contr.resize && contr.resize();
+            //_module && _module._scroll && _module._scroll.refresh && _module._scroll.refresh();
+        }
+
+    }
 
     mad.extend(mad.fn.app, {
         transitions: function (transition, show, hide, speed, transitionsCallback) {
@@ -154,7 +237,7 @@
                         "opacity": 1
                     });
 
-                    this.windowResize();
+                    windowResize();
 
                     if (transition == "slideLeft") {
                         translate3d = "translate3d" + "(" + "-" + w + "px" + "," + "0px" + "," + "0px" + ")";
@@ -250,7 +333,7 @@
                         }
                     });
 
-                    this.windowResize();
+                    windowResize();
 
                     break;
 
@@ -290,7 +373,7 @@
                     //_option["width"] = "100%";
                     //_option["height"] = "100%";
 
-                    this.windowResize();
+                    windowResize();
 
                     if (typeof transitionsCallback == "function") {
                         transitionsCallback();
@@ -376,7 +459,7 @@
                 page.attr("id", id);
                 page.attr("data-role", "page");
                 page.addClass("page");
-                page.addClass("none")
+                page.css("display", "none");
 
                 var container = $("#container");
                 container.append(page);
@@ -385,44 +468,6 @@
                     _this.hideLoading();
                 }
             }
-        },
-        windowResize: function () {
-
-            var _this = this;
-            _this.width = $(window).width();
-            _this.height = $(window).height();
-
-            document.documentElement.style.height = _this.height + "px";
-
-            $("#mad-outer").css({
-                "height": _this.height
-            });
-
-            $(".page").css({
-                "width": _this.width,
-                "height": _this.height
-            });
-
-            $(".page").each(function () {
-
-                var scrollerSectionHeight = _this.height - $(this).find("header").height()
-                                                        - $(this).find("footer").height()
-                - $(this).find(".statusbar").height();
-                $(this).find("section").height(scrollerSectionHeight);
-            });
-
-
-            $(".modal").css({
-                "width": _this.width,
-                "height": _this.height
-            });
-
-            $(".modal").each(function () {
-
-                var scrollerSectionHeight = _this.height - $(this).find("header").height() - $(this).find("footer").height() - $(this).find(".statusbar").height();
-                $(this).find("section").height(scrollerSectionHeight);
-            });
-
         },
         initApp: function () {
 
@@ -440,11 +485,28 @@
                 $("body").append($div);
             }
         },
-        ready: function () {
+        ready: function (options) {
 
             var _this = this;
+            if (typeof options == "object") {
+                mad.app.isIos = options.isIos;
+                mad.app.isAndroid = options.isAndroid;
+            }
+
+            mad.app.isIos = mad.app.isIos || /iPhone|iPad|iPod|iOS/i.test(global.navigator.userAgent);
+            mad.app.isAndroid = mad.app.isAndroid || /Android/i.test(global.navigator.userAgent);
 
             document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+            //
+            if (mad.app.isIos) {
+                window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", orientationChange, false);
+            }
+            else {
+                $(window).resize(function () {
+                    windowResizeFunc();
+                });
+            }
 
             _this.width = $(window).width();
             _this.height = $(window).height();
@@ -489,7 +551,6 @@
             });
         }
     });
-
-
+    
 
 })(this);

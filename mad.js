@@ -1,11 +1,11 @@
 ﻿/** @license
  * Madjs <>
  * Author: indifer | MIT License
- * Email: indifer@126.com
- * v0.9.0 (2014/07/02 16:24)
+ * Email: indifer@126.com|liangyi_z@126.com
+ * v0.9.0 (2014/07/06 10:38)
  */
 
-
+;
 /*jslint indent:4, white:true, nomen:true, plusplus:true */
 /*global define:false, require:false, exports:false, module:false, signals:false */
 
@@ -1157,10 +1157,10 @@ if (typeof define === 'function' && define.amd) {
 
     $.fn.globalTapDie = function (f) {
         if (ontouchstartSupported) {
-            this.live("tap", f);
+            this.die("tap", f);
         }
         else {
-            this.live("click", f);
+            this.die("click", f);
         }
     };
 
@@ -1218,8 +1218,8 @@ if (typeof define === 'function' && define.amd) {
             
             if (_this.routeType == 0) {
                 var _r = route;
-                action.apply(options.action, arguments);
                 _this.currentRouteName = _r;
+                action.apply(options.action, arguments);
             }
             else if (_this.routeType == 1 && typeof (beforeAction) == "function") {
 
@@ -1233,6 +1233,7 @@ if (typeof define === 'function' && define.amd) {
         }
         _route.existBeforeAction = typeof (options.beforeAction) == "function";
         _route.reset = options.reset;
+        _route.resize = options.resize;
         _route.destroy = options.destroy;
         _route.module = options.module;
 
@@ -1583,8 +1584,9 @@ if (typeof define === 'function' && define.amd) {
     mad.view.templates = {};
     mad.view.pages = {};
     
-    mad.extend(mad.fn.view, { //添加page
-        addPage: function (id, url, data) {
+    mad.extend(mad.fn.view, {
+        //声明page
+        definePage: function (id, url, data) {
             this.pages[id] = {
                 url: url,
                 data: data
@@ -1742,9 +1744,92 @@ if (typeof define === 'function' && define.amd) {
 
     mad.fn.app = {
     };
-
+    
     mad.app.views = {};
     mad.app.transitionsFlag = 0;
+    mad.app.isIos = null;
+    mad.app.isAndroid = null;
+    mad.app.isHideBrowserTop = true;
+
+    var events = {};
+
+    function hideBrowserTop() {
+        window.scrollTo(0, 1);
+    }
+
+    //屏幕大小改变
+    function windowResizeFunc() {
+
+        if (mad.app.isHideBrowserTop) {
+            document.documentElement.style.height = "2000px";
+            hideBrowserTop();
+        }
+
+        windowResize();
+
+        //setTimeout(function () { document.documentElement.style.height = app.height + "px"; }, 50)
+    }
+
+    //屏幕方向改变
+    function orientationChange() {
+        switch (window.orientation) {
+            case 0: // Portrait
+            case 180: // Upside-down Portrait
+            case -90: // Landscape: turned 90 degrees counter-clockwise
+            case 90: // Landscape: turned 90 degrees clockwise
+                // Javascript to steup Landscape view
+                windowResizeFunc();
+                break;
+        }
+    }
+    
+    //屏幕大小改变
+    function windowResize() {
+
+        var _this = this;
+        _this.width = $(window).width();
+        _this.height = $(window).height();
+
+        document.documentElement.style.height = _this.height + "px";
+
+        $("#mad-outer").css({
+            "height": _this.height
+        });
+
+        $(".page").css({
+            "width": _this.width,
+            "height": _this.height
+        });
+
+        $(".page").each(function () {
+
+            var scrollerSectionHeight = _this.height - $(this).find("header").height()
+                                                    - $(this).find("footer").height()
+            - $(this).find(".statusbar").height();
+            $(this).find("section").height(scrollerSectionHeight);
+        });
+
+
+        $(".modal").css({
+            "width": _this.width,
+            "height": _this.height
+        });
+
+        $(".modal").each(function () {
+
+            var scrollerSectionHeight = _this.height - $(this).find("header").height() - $(this).find("footer").height() - $(this).find(".statusbar").height();
+            $(this).find("section").height(scrollerSectionHeight);
+        });
+
+
+        if (mad.controllers[mad.currentRouteName]) {
+            var contr = mad.controllers[mad.currentRouteName];
+
+            contr && contr.resize && contr.resize();
+            //_module && _module._scroll && _module._scroll.refresh && _module._scroll.refresh();
+        }
+
+    }
 
     mad.extend(mad.fn.app, {
         transitions: function (transition, show, hide, speed, transitionsCallback) {
@@ -1792,7 +1877,7 @@ if (typeof define === 'function' && define.amd) {
                         "opacity": 1
                     });
 
-                    this.windowResize();
+                    windowResize();
 
                     if (transition == "slideLeft") {
                         translate3d = "translate3d" + "(" + "-" + w + "px" + "," + "0px" + "," + "0px" + ")";
@@ -1888,7 +1973,7 @@ if (typeof define === 'function' && define.amd) {
                         }
                     });
 
-                    this.windowResize();
+                    windowResize();
 
                     break;
 
@@ -1928,7 +2013,7 @@ if (typeof define === 'function' && define.amd) {
                     //_option["width"] = "100%";
                     //_option["height"] = "100%";
 
-                    this.windowResize();
+                    windowResize();
 
                     if (typeof transitionsCallback == "function") {
                         transitionsCallback();
@@ -2014,7 +2099,7 @@ if (typeof define === 'function' && define.amd) {
                 page.attr("id", id);
                 page.attr("data-role", "page");
                 page.addClass("page");
-                page.addClass("none")
+                page.css("display", "none");
 
                 var container = $("#container");
                 container.append(page);
@@ -2023,44 +2108,6 @@ if (typeof define === 'function' && define.amd) {
                     _this.hideLoading();
                 }
             }
-        },
-        windowResize: function () {
-
-            var _this = this;
-            _this.width = $(window).width();
-            _this.height = $(window).height();
-
-            document.documentElement.style.height = _this.height + "px";
-
-            $("#mad-outer").css({
-                "height": _this.height
-            });
-
-            $(".page").css({
-                "width": _this.width,
-                "height": _this.height
-            });
-
-            $(".page").each(function () {
-
-                var scrollerSectionHeight = _this.height - $(this).find("header").height()
-                                                        - $(this).find("footer").height()
-                - $(this).find(".statusbar").height();
-                $(this).find("section").height(scrollerSectionHeight);
-            });
-
-
-            $(".modal").css({
-                "width": _this.width,
-                "height": _this.height
-            });
-
-            $(".modal").each(function () {
-
-                var scrollerSectionHeight = _this.height - $(this).find("header").height() - $(this).find("footer").height() - $(this).find(".statusbar").height();
-                $(this).find("section").height(scrollerSectionHeight);
-            });
-
         },
         initApp: function () {
 
@@ -2078,11 +2125,28 @@ if (typeof define === 'function' && define.amd) {
                 $("body").append($div);
             }
         },
-        ready: function () {
+        ready: function (options) {
 
             var _this = this;
+            if (typeof options == "object") {
+                mad.app.isIos = options.isIos;
+                mad.app.isAndroid = options.isAndroid;
+            }
+
+            mad.app.isIos = mad.app.isIos || /iPhone|iPad|iPod|iOS/i.test(global.navigator.userAgent);
+            mad.app.isAndroid = mad.app.isAndroid || /Android/i.test(global.navigator.userAgent);
 
             document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+            //
+            if (mad.app.isIos) {
+                window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", orientationChange, false);
+            }
+            else {
+                $(window).resize(function () {
+                    windowResizeFunc();
+                });
+            }
 
             _this.width = $(window).width();
             _this.height = $(window).height();
@@ -2127,8 +2191,7 @@ if (typeof define === 'function' && define.amd) {
             });
         }
     });
-
-
+    
 
 })(this);
 

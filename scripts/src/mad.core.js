@@ -42,8 +42,8 @@
             
             if (_this.routeType == 0) {
                 var _r = route;
-                action.apply(options.action, arguments);
                 _this.currentRouteName = _r;
+                action.apply(options.action, arguments);
             }
             else if (_this.routeType == 1 && typeof (beforeAction) == "function") {
 
@@ -57,6 +57,7 @@
         }
         _route.existBeforeAction = typeof (options.beforeAction) == "function";
         _route.reset = options.reset;
+        _route.resize = options.resize;
         _route.destroy = options.destroy;
         _route.module = options.module;
 

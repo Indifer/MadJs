@@ -19,10 +19,10 @@
 
     $.fn.globalTapDie = function (f) {
         if (ontouchstartSupported) {
-            this.live("tap", f);
+            this.die("tap", f);
         }
         else {
-            this.live("click", f);
+            this.die("click", f);
         }
     };
 

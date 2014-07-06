@@ -1,7 +1,7 @@
 {
     "name": "Madjs",
     "description": "Help develop one page app for the mobile web",
-    "version": "0.9.0",
+    "version": "0.9.1",
     "homepage": "",
     "main": "mad.js",
     "licenses" : [
@@ -12,7 +12,7 @@
     ],
     "author": {
         "name": "indifer",
-        "email": "indifer@126.com"
+        "email": "indifer@126.com|liangyi_z@126.com"
     },
     "keywords": [
         "mobile",

@@ -13,8 +13,9 @@
     mad.view.templates = {};
     mad.view.pages = {};
     
-    mad.extend(mad.fn.view, { //添加page
-        addPage: function (id, url, data) {
+    mad.extend(mad.fn.view, {
+        //声明page
+        definePage: function (id, url, data) {
             this.pages[id] = {
                 url: url,
                 data: data
