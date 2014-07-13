@@ -70,7 +70,7 @@
 			}
 		},
 
-		dateFormat: function (date) {
+		dateFormat: function (date, format) {
 			var o = {
 				"M+": date.getMonth() + 1, //month
 				"d+": date.getDate(),    //day

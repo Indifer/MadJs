@@ -2,7 +2,7 @@
  * Madjs <>
  * Author: indifer | MIT License
  * Email: indifer@126.com|liangyi_z@126.com
- * v0.9.0 (2014/07/06 10:38)
+ * v0.9.1 (2014/07/13 16:58)
  */
 
 ;
@@ -1380,7 +1380,7 @@ if (typeof define === 'function' && define.amd) {
 			}
 		},
 
-		dateFormat: function (date) {
+		dateFormat: function (date, format) {
 			var o = {
 				"M+": date.getMonth() + 1, //month
 				"d+": date.getDate(),    //day
