@@ -2,7 +2,7 @@
  * Madjs <>
  * Author: indifer | MIT License
  * Email: indifer@126.com|liangyi_z@126.com
- * v0.9.1 (2014/07/13 16:58)
+ * v0.9.1 (2014/08/08 14:27)
  */
 
 ;
