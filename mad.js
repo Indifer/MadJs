@@ -2,7 +2,7 @@
  * Madjs <>
  * Author: indifer | MIT License
  * Email: indifer@126.com|liangyi_z@126.com
- * v0.9.1 (2014/08/08 14:27)
+ * v0.9.2 (2014/08/29 00:46)
  */
 
 ;
@@ -1744,7 +1744,7 @@ if (typeof define === 'function' && define.amd) {
 
     mad.fn.app = {
     };
-    
+
     mad.app.views = {};
     mad.app.transitionsFlag = 0;
     mad.app.isIos = null;
@@ -1782,7 +1782,7 @@ if (typeof define === 'function' && define.amd) {
                 break;
         }
     }
-    
+
     //屏幕大小改变
     function windowResize() {
 
@@ -1832,6 +1832,12 @@ if (typeof define === 'function' && define.amd) {
     }
 
     mad.extend(mad.fn.app, {
+        events: {},
+        addEvent: function (name, callback) {
+            this.events[name] = this.events[name] || [];
+            this.events[name].push(callback);
+        },
+        beforeGotoPage: null,
         transitions: function (transition, show, hide, speed, transitionsCallback) {
 
             var browserVariables = mad.browserVariables;
@@ -2050,6 +2056,13 @@ if (typeof define === 'function' && define.amd) {
 
             _this.initPage(toRouteName);
 
+            if (_this.events["onBeforeGotoPage"]) {
+                var actions = _this.events["onBeforeGotoPage"];
+                for (var i = 0; i < actions.length; i++) {
+                    actions[i](fromRouteName, toRouteName);
+                }
+            }
+
             reset = reset != null && reset.toString() == "true" ? true : false;
             back = back != null && back.toString() == "true" ? true : false;
             //history
@@ -2191,7 +2204,7 @@ if (typeof define === 'function' && define.amd) {
             });
         }
     });
-    
+
 
 })(this);
 

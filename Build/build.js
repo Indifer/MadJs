@@ -15,7 +15,7 @@ var _fs = require('fs'),
         VERSION_NUMBER: _pkg.version,
         HOMEPAGE: _pkg.homepage,
         LICENSE: _pkg.licenses[0].type,
-        BUILD_DATE: _now.getUTCFullYear() + '/' + pad(_now.getUTCMonth() + 1) + '/' + pad(_now.getUTCDate()) + ' ' + pad(_now.getUTCHours()) + ':' + pad(_now.getUTCMinutes())
+        BUILD_DATE: _now.getFullYear() + '/' + pad(_now.getMonth() + 1) + '/' + pad(_now.getDate()) + ' ' + pad(_now.getHours()) + ':' + pad(_now.getMinutes())
     };
 
 function readFile(filePath) {

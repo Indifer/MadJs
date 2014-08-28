@@ -104,7 +104,7 @@
 
     mad.fn.app = {
     };
-    
+
     mad.app.views = {};
     mad.app.transitionsFlag = 0;
     mad.app.isIos = null;
@@ -142,7 +142,7 @@
                 break;
         }
     }
-    
+
     //屏幕大小改变
     function windowResize() {
 
@@ -192,6 +192,12 @@
     }
 
     mad.extend(mad.fn.app, {
+        events: {},
+        addEvent: function (name, callback) {
+            this.events[name] = this.events[name] || [];
+            this.events[name].push(callback);
+        },
+        beforeGotoPage: null,
         transitions: function (transition, show, hide, speed, transitionsCallback) {
 
             var browserVariables = mad.browserVariables;
@@ -410,6 +416,13 @@
 
             _this.initPage(toRouteName);
 
+            if (_this.events["onBeforeGotoPage"]) {
+                var actions = _this.events["onBeforeGotoPage"];
+                for (var i = 0; i < actions.length; i++) {
+                    actions[i](fromRouteName, toRouteName);
+                }
+            }
+
             reset = reset != null && reset.toString() == "true" ? true : false;
             back = back != null && back.toString() == "true" ? true : false;
             //history
@@ -551,6 +564,6 @@
             });
         }
     });
-    
+
 
 })(this);
